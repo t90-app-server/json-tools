@@ -1,14 +1,15 @@
 import { Grid, makeStyles, TextField } from '@material-ui/core'
 import React, { useState, useEffect } from 'react'
 import jsonLint from 'jsonlint-mod'
-import beautify from 'js-beautify/js/lib/beautify'
+
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { docco, a11yDark, dracula, materialLight } from 'react-syntax-highlighter/dist/esm/styles/prism'
-import { red } from '@material-ui/core/colors'
+import { grey, red } from '@material-ui/core/colors'
 
 const useStyles = makeStyles(theme => ({
     codeBox: {
-        height: `calc(80vh - ${theme.mixins.toolbar.minHeight}px - 3rem)`
+        height: `calc(80vh - ${theme.mixins.toolbar.minHeight}px - 3rem)`,
+        border: `1px solid ${grey[500]}70`,
     },
     codeBoxContainer: {
         height: `calc(100vh - ${theme.mixins.toolbar.minHeight}px - 3rem)`
@@ -21,10 +22,6 @@ const CodeBox = () => {
     const [errorMessages, setErrorMessages] = useState([])
     const { codeBoxContainer, codeBox } = useStyles()
     const [darkTheme, setDarkTheme] = useState(false)
-
-    const parseAndSetInput = () => {
-        setJsonInput(beautify.js_beautify(jsonInput, { indent_size: 4 }))
-    }
 
     useEffect(() => {
         setTimeout(() => {
@@ -43,19 +40,7 @@ const CodeBox = () => {
 
     return (
         <>
-            <Grid item xs={12} md={6} className={codeBoxContainer}>
-                <TextField
-                    multiline
-                    variant="outlined"
-                    rows={50}
-                    rowsMax={120}
-                    fullWidth
-                    value={jsonInput}
-                    className={codeBox}
-                    onDoubleClick={() => parseAndSetInput()}
-                    onChange={e => setJsonInput(e.target.value)}
-                ></TextField>
-            </Grid>
+            
             <Grid item xs={12} md={6} className={codeBoxContainer}>
                 <SyntaxHighlighter
                     language="json"

@@ -1,24 +1,52 @@
-import { AppBar, Button, Container, IconButton, makeStyles, Toolbar, Typography } from '@material-ui/core'
-import MenuIcon from '@material-ui/icons/MenuOutlined'
+import { AppBar, Container, IconButton, makeStyles, Toolbar, Typography } from '@material-ui/core'
+import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
+import LightIcon from '@material-ui/icons/Brightness7'
+import DarkIcon from '@material-ui/icons/Brightness3'
+import GitHubIcon from '@material-ui/icons/GitHub'
+import { grey } from '@material-ui/core/colors'
 import React from 'react'
 
-const useStyles = makeStyles(() => ({}))
+const useStyles = makeStyles(theme => ({
+    darkToolBar: {
+        backgroundColor: grey[900],
+        boxShadow: theme.shadows[15]
+    },
+    darkBody: {
+        backgroundColor: 'rgb(33 33 33)',
+        height: '100vh'
+    },
+    title: {
+        margin: 'auto',
+        fontSize: '2rem'
+    },
+    toolbarIcon: {
+        color: `${grey[100]}90`
+    }
+}))
 
-const Layout = ({ children }) => {
-    const abc = useStyles()
+const Layout = ({ children, darkTheme, setDarkTheme }) => {
+    const { darkBody, darkToolBar, title, toolbarIcon } = useStyles()
     return (
-        <>
-            <AppBar position="static">
-                <Toolbar>
-                    <IconButton edge="start" color="inherit" aria-label="menu">
-                        <MenuIcon />
+        <div className={darkTheme ? darkBody : ''}>
+            <AppBar position='static' className={darkTheme ? darkToolBar : ''}>
+                <Toolbar className={darkTheme ? darkToolBar : ''}>
+                    <Typography variant='h1' className={title}>
+                        JSON Tools [WIP]
+                    </Typography>
+                    <IconButton title={`Turn on ${darkTheme ? 'light' : 'dark'} theme`} onClick={() => setDarkTheme(!darkTheme)}>
+                        {darkTheme ? <LightIcon className={toolbarIcon} /> : <DarkIcon className={toolbarIcon} />}
                     </IconButton>
-                    <Typography variant="h6">News</Typography>
-                    <Button color="inherit">Login</Button>
+                    <IconButton title="View this project on github" onClick={() => alert("TODO")}>
+                        <GitHubIcon className={toolbarIcon} />
+                    </IconButton>
+                    <IconButton title="Help" onClick={() => alert("TODO")}>
+                        <HelpOutlineIcon className={toolbarIcon} />
+                    </IconButton>
+                    
                 </Toolbar>
             </AppBar>
-            <Container maxWidth="xl">{children}</Container>
-        </>
+            <Container maxWidth='xl'>{children}</Container>
+        </div>
     )
 }
 
