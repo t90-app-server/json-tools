@@ -125,7 +125,6 @@ const ParseStringInput = ({ darkTheme, jsonInput, setParsedJson }) => {
     useEffect(() => {
         setErrorMessage('')
         if (!!jsonInput && !!parseString && isJsonValid(jsonInput)) {
-            setErrorMessage('')
             let jsonValue = JSON.parse(jsonInput)
             let parsedJson = parseJson(jsonValue, parseString.split('.'))
             setParsedJson(parsedJson)
