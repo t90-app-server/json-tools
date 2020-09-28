@@ -27,12 +27,23 @@ const useStyles = makeStyles(theme => {
         darkThemeButton: {
             borderColor: grey[500],
             color: 'white'
+        },
+        buttonStyle: {
+            [theme.breakpoints.down('sm')]: {
+                fontSize: '0.65rem'
+            },
+            '& svg': {
+                [theme.breakpoints.down('sm')]: {
+                    height: '0.8em',
+                    width: '0.8em'
+                }
+            }
         }
     }
 })
 
 const ButtonBox = ({ jsonInput, setJsonInput, darkTheme }) => {
-    const { buttonBox, darkThemeContainer, darkThemeButton } = useStyles()
+    const { buttonBox, darkThemeContainer, darkThemeButton, buttonStyle } = useStyles()
 
     const parseAndSetInput = () => {
         setJsonInput(beautify.js_beautify(jsonInput, { indent_size: 4 }))
@@ -78,7 +89,7 @@ const ButtonBox = ({ jsonInput, setJsonInput, darkTheme }) => {
     ]
 
     return (
-        <Grid item container sm={12} className={[buttonBox, darkTheme && darkThemeContainer].join(' ')}>
+        <Grid item container xs={12} className={[buttonBox, darkTheme && darkThemeContainer].join(' ')}>
             <Grid item xs={6} md={7} xl={8}></Grid>
             <Grid item container xs={6} md={5} xl={4} spacing={1} justify='space-around'>
                 {buttons.map(button => (
@@ -86,7 +97,7 @@ const ButtonBox = ({ jsonInput, setJsonInput, darkTheme }) => {
                         <Button
                             fullWidth
                             id={button.id}
-                            className={darkTheme ? darkThemeButton : ''}
+                            className={[buttonStyle, darkTheme ? darkThemeButton : ''].join(' ')}
                             onClick={() => button.clickHandler()}
                             startIcon={<button.icon />}
                             size='small'

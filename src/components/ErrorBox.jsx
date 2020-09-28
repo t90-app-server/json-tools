@@ -37,7 +37,7 @@ const ErrorBox = ({ darkTheme, errors }) => {
             <pre>{errors && String(errors)}</pre>
         </Grid>
     ) : (
-        <Grid item sm={12} className={[buttonBox, darkTheme && darkThemeContainer].join(' ')}>
+        <Grid item xs={12} className={[buttonBox, darkTheme && darkThemeContainer].join(' ')}>
             <Typography>
                 The JSON is valid{' '}
                 <span role='img' aria-label='happy face'>
