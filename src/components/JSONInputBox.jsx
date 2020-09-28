@@ -9,7 +9,6 @@ const useStyles = makeStyles(theme => ({
         borderRadius: '0.5rem',
         backgroundColor: 'rgb(250, 250, 250)',
         boxShadow: theme.shadows[5],
-        overflow: 'scroll',
         '& div:before': {
             borderBottom: '0px !important'
         },
@@ -19,11 +18,13 @@ const useStyles = makeStyles(theme => ({
         '& textarea': {
             border: '0px',
             margin: '1rem',
+            height: `calc(96.2vh - ${theme.mixins.toolbar.minHeight}px - 7.7rem)`,
             textDecoration: 'none',
             borderRadius: '0.5rem',
             fontFamily: 'Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace',
             boxShadow: `inset 0px 3px 3px -1px rgba(0,0,0,0.15), inset 0px 5px 5px 0px rgba(0,0,0,0.1), inset 0px 1px 10px 0px rgba(0,0,0,0.1)`,
-            padding: '1rem'
+            padding: '1rem',
+            overflow: 'scroll'
         }
     },
     darkThemeInput: {
@@ -40,15 +41,19 @@ const JSONInputBox = ({ jsonInput, setJsonInput, darkTheme }) => {
     const { codeBox, darkThemeInput } = useStyles()
 
     return (
-        <TextField
-            multiline
-            rows={60}
-            fullWidth
-            value={jsonInput}
-            placeholder={'Enter JSON input'}
-            className={[codeBox, darkTheme && darkThemeInput].join(' ')}
-            onChange={e => setJsonInput(e.target.value)}
-        />
+        <label title='JSON Input'>
+            <TextField
+                multiline
+                rows={50}
+                fullWidth
+                autoFocus
+                value={jsonInput}
+                placeholder={'Enter JSON input'}
+                inputRef={input => input && input.focus()}
+                className={[codeBox, darkTheme && darkThemeInput].join(' ')}
+                onChange={e => setJsonInput(e.target.value)}
+            />
+        </label>
     )
 }
 

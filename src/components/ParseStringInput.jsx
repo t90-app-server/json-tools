@@ -11,7 +11,9 @@ const useStyles = makeStyles(theme => {
             backgroundColor: 'rgb(250, 250, 250)',
             boxShadow: theme.shadows[5],
             padding: '1rem',
-            marginTop: '3rem',
+            [theme.breakpoints.up('lg')]: {
+                marginTop: '3rem'
+            },
             '& pre': {
                 color: red[500]
             }
@@ -123,9 +125,13 @@ const ParseStringInput = ({ darkTheme, jsonInput, setParsedJson }) => {
     useEffect(() => {
         setErrorMessage('')
         if (!!jsonInput && !!parseString && isJsonValid(jsonInput)) {
+            setErrorMessage('')
             let jsonValue = JSON.parse(jsonInput)
             let parsedJson = parseJson(jsonValue, parseString.split('.'))
             setParsedJson(parsedJson)
+        } else if (!!jsonInput && !isJsonValid(jsonInput)) {
+            setErrorMessage('Input string is not a valid json')
+            setParsedJson(jsonInput)
         } else {
             setParsedJson(jsonInput)
         }
@@ -133,15 +139,18 @@ const ParseStringInput = ({ darkTheme, jsonInput, setParsedJson }) => {
 
     return (
         <Grid item sm={12} className={[buttonBox, darkTheme ? darkThemeContainer : ''].join(' ')}>
-            <TextField
-                fullWidth
-                size='small'
-                placeholder='Parser query'
-                variant='standard'
-                value={parseString}
-                onChange={e => setParseString(e.target.value)}
-                className={[parserQueryInput, darkTheme ? parserQueryInputDark : ''].join(' ')}
-            />
+            <label title='Parser query'>
+                <TextField
+                    fullWidth
+                    size='small'
+                    placeholder='Parser query'
+                    variant='standard'
+                    value={parseString}
+                    disabled={!isJsonValid(jsonInput)}
+                    onChange={e => setParseString(e.target.value)}
+                    className={[parserQueryInput, darkTheme ? parserQueryInputDark : ''].join(' ')}
+                />
+            </label>
             {errorMessage && <Typography className={errorMessageText}>{errorMessage}</Typography>}
             {!errorMessage && <Typography className={helperMessageText}>Enter the parse query</Typography>}
         </Grid>
