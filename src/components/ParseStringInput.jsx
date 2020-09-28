@@ -137,7 +137,7 @@ const ParseStringInput = ({ darkTheme, jsonInput, setParsedJson }) => {
     }, [parseString, jsonInput, setParsedJson]) // eslint-disable-line
 
     return (
-        <Grid item sm={12} className={[buttonBox, darkTheme ? darkThemeContainer : ''].join(' ')}>
+        <Grid item xs={12} className={[buttonBox, darkTheme ? darkThemeContainer : ''].join(' ')}>
             <label title='Parser query'>
                 <TextField
                     fullWidth

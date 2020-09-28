@@ -17,7 +17,9 @@ const useStyles = makeStyles(theme => ({
     },
     title: {
         margin: 'auto',
-        fontSize: '2rem'
+        fontSize: '1.5rem',
+        marginTop: '1.5rem',
+        paddingLeft: '10rem'
     },
     toolbarIcon: {
         color: `${grey[100]}90`

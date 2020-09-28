@@ -36,7 +36,7 @@ const ParsedJSONBox = ({ jsonInput, darkTheme, errorMessages, setErrorMessages }
     }, [jsonInput, setErrorMessages])
 
     return (
-        <Grid item sm={12}>
+        <Grid item xs={12}>
             <SyntaxHighlighter
                 language='json'
                 style={darkTheme ? a11yDark : materialLight}
