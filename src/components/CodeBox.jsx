@@ -3,16 +3,16 @@ import React, { useState, useEffect } from 'react'
 import jsonLint from 'jsonlint-mod'
 
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { docco, a11yDark, dracula, materialLight } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import { dracula, materialLight } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import { grey, red } from '@material-ui/core/colors'
 
 const useStyles = makeStyles(theme => ({
     codeBox: {
-        height: `calc(80vh - ${theme.mixins.toolbar.minHeight}px - 3rem)`,
+        height: `calc(66.1vh)`,
         border: `1px solid ${grey[500]}70`,
     },
     codeBoxContainer: {
-        height: `calc(100vh - ${theme.mixins.toolbar.minHeight}px - 3rem)`
+        height: `calc(62vh)`
     }
 }))
 

@@ -8,7 +8,7 @@ import { grey, red } from '@material-ui/core/colors'
 const useStyles = makeStyles(theme => {
     return {
         codeBox: {
-            height: `calc(64vh - ${theme.mixins.toolbar.minHeight}px - 3rem)`,
+            height: `calc(66.1vh)`,
             border: `1px solid ${grey[500]}30`,
             boxShadow: theme.shadows[5],
             borderRadius: '0.5rem !important'
