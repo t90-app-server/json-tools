@@ -136,6 +136,16 @@ const ParseStringInput = ({ darkTheme, jsonInput, setParsedJson }) => {
         }
     }, [parseString, jsonInput, setParsedJson]) // eslint-disable-line
 
+    useEffect(() => {
+        if (!jsonInput || !isJsonValid(jsonInput)) {
+            setParseString('')
+        } else {
+            let jsonValue = JSON.parse(jsonInput)
+            let parsedJson = parseJson(jsonValue, parseString.split('.'))
+            setParsedJson(parsedJson)
+        }
+    }, [jsonInput]) // eslint-disable-line
+
     return (
         <Grid item xs={12} className={[buttonBox, darkTheme ? darkThemeContainer : ''].join(' ')}>
             <label title='Parser query'>

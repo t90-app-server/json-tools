@@ -5,7 +5,6 @@ import JSONInputBox from './components/JSONInputBox'
 import ParsedJSONBox from './components/ParsedJSONBox'
 import ParseStringInput from './components/ParseStringInput'
 import ButtonBox from './components/ButtonBox'
-import ErrorBox from './components/ErrorBox'
 import beautify from 'js-beautify/js/lib/beautify'
 
 const useStyles = makeStyles(theme => {
@@ -20,7 +19,9 @@ const useStyles = makeStyles(theme => {
 function App() {
     const { codeBoxContainer } = useStyles()
     const [jsonInput, setJsonInput] = useState(
-        '{"this": "is","a": {"test": "to","show": "syntax","test2": 123,"and": [ { "to" : "see"}, {"if": "anything is working and"}, {"to": { "test": "parsing"}}] }}'
+        process.env.NODE_ENV === 'PRODUCTION'
+            ? ''
+            : '{"this": "is","a": {"test": "to","show": "syntax","test2": 123,"and": [ { "to" : "see"}, {"if": "anything is working and"}, {"to": { "test": "parsing"}}] }}'
     )
     const [darkTheme, setDarkTheme] = useState(true)
     const [parsedJson, setParsedJson] = useState('')
@@ -47,7 +48,7 @@ function App() {
                 } else {
                     setParsedJson(jsonInput)
                 }
-            }, 500)
+            }, 1000)
         } else {
             setParsedJson('')
         }
@@ -62,15 +63,22 @@ function App() {
                     </Grid>
                 </Slide>
                 {!!jsonInput && (
-                    <Slide in={true} timeout={200} direction={'left'}>
+                    <Slide in={true} timeout={500} direction={'left'}>
                         <Grid container item xs={12} lg={6} alignContent='flex-start'>
                             <ParseStringInput jsonInput={jsonInput} setParsedJson={setParsedJson} darkTheme={darkTheme} />
 
-                            <ButtonBox jsonInput={jsonInput} setJsonInput={setJsonInput} setDarkTheme={setDarkTheme} darkTheme={darkTheme} />
+                            <ButtonBox
+                                jsonInput={jsonInput}
+                                parsedJson={parsedJson}
+                                setJsonInput={setJsonInput}
+                                setDarkTheme={setDarkTheme}
+                                darkTheme={darkTheme}
+                                errors={errorMessages}
+                            />
 
                             <ParsedJSONBox jsonInput={parsedJson} darkTheme={darkTheme} errorMessages={errorMessages} setErrorMessages={setErrorMessages} />
 
-                            <ErrorBox darkTheme={darkTheme} errors={errorMessages} />
+                            {/* <ErrorBox darkTheme={darkTheme} errors={errorMessages} /> */}
                         </Grid>
                     </Slide>
                 )}

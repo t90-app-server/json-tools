@@ -49,7 +49,7 @@ const JSONInputBox = ({ jsonInput, setJsonInput, darkTheme }) => {
                 autoFocus
                 value={jsonInput}
                 placeholder={'Enter JSON input'}
-                inputRef={input => input && input.focus()}
+                inputRef={input => input && !jsonInput && input.focus()}
                 className={[codeBox, darkTheme && darkThemeInput].join(' ')}
                 onChange={e => setJsonInput(e.target.value)}
             />
