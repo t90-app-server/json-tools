@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => {
 function App() {
     const { codeBoxContainer } = useStyles()
     const [jsonInput, setJsonInput] = useState(
-        process.env.NODE_ENV === 'PRODUCTION'
+        process.env.NODE_ENV === 'production'
             ? ''
             : '{"this": "is","a": {"test": "to","show": "syntax","test2": 123,"and": [ { "to" : "see"}, {"if": "anything is working and"}, {"to": { "test": "parsing"}}] }}'
     )
