@@ -4,7 +4,7 @@ import React from 'react'
 
 const useStyles = makeStyles(theme => ({
     codeBox: {
-        height: `calc(96.2vh - ${theme.mixins.toolbar.minHeight}px - 3rem)`,
+        height: `calc(100vh - ${theme.mixins.toolbar.minHeight}px - 4.2rem)`,
         border: `1px solid ${grey[500]}30`,
         borderRadius: '0.5rem',
         backgroundColor: 'rgb(250, 250, 250)',
@@ -16,9 +16,9 @@ const useStyles = makeStyles(theme => ({
             borderBottom: '0px !important'
         },
         '& textarea': {
+            height: `calc(100vh - ${theme.mixins.toolbar.minHeight}px - 9rem)`,
             border: '0px',
             margin: '1rem',
-            height: `calc(96.2vh - ${theme.mixins.toolbar.minHeight}px - 7.7rem)`,
             textDecoration: 'none',
             borderRadius: '0.5rem',
             fontFamily: 'Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace',
@@ -41,19 +41,21 @@ const JSONInputBox = ({ jsonInput, setJsonInput, darkTheme }) => {
     const { codeBox, darkThemeInput } = useStyles()
 
     return (
-        <label title='JSON Input'>
-            <TextField
-                multiline
-                rows={50}
-                fullWidth
-                autoFocus
-                value={jsonInput}
-                placeholder={'Enter JSON input'}
-                inputRef={input => input && !jsonInput && input.focus()}
-                className={[codeBox, darkTheme && darkThemeInput].join(' ')}
-                onChange={e => setJsonInput(e.target.value)}
-            />
-        </label>
+        <>
+            <label style={{ width: '100%' }} title='JSON Input'>
+                <TextField
+                    multiline
+                    rows={50}
+                    fullWidth
+                    autoFocus
+                    value={jsonInput}
+                    placeholder={'Enter JSON input'}
+                    inputRef={input => input && !jsonInput && input.focus()}
+                    className={[codeBox, darkTheme && darkThemeInput].join(' ')}
+                    onChange={e => setJsonInput(e.target.value)}
+                />
+            </label>
+        </>
     )
 }
 
