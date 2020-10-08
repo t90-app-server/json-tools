@@ -1,23 +1,9 @@
-import { Grid, makeStyles, TextField, Typography } from '@material-ui/core'
+import { makeStyles, TextField, Typography } from '@material-ui/core'
 import { grey, red } from '@material-ui/core/colors'
 import React, { useEffect, useState } from 'react'
 
 const useStyles = makeStyles(theme => {
     return {
-        buttonBox: {
-            height: '6rem',
-            borderRadius: '0.5rem',
-            border: `1px solid ${grey[500]}30`,
-            backgroundColor: 'rgb(250, 250, 250)',
-            boxShadow: theme.shadows[5],
-            padding: '1rem',
-            [theme.breakpoints.up('lg')]: {
-                marginTop: '3rem'
-            },
-            '& pre': {
-                color: red[500]
-            }
-        },
         parserQueryInput: {
             '& input': {
                 color: grey[900],
@@ -34,11 +20,6 @@ const useStyles = makeStyles(theme => {
             '& div:after': {
                 borderBottom: '0px !important'
             }
-        },
-        darkThemeContainer: {
-            boxShadow: `${theme.shadows[7]}`,
-            backgroundColor: 'rgb(43, 43, 43)',
-            color: 'white'
         },
         parserQueryInputDark: {
             '& input': {
@@ -58,8 +39,8 @@ const useStyles = makeStyles(theme => {
     }
 })
 
-const ParseStringInput = ({ darkTheme, jsonInput, setParsedJson }) => {
-    const { buttonBox, darkThemeContainer, parserQueryInput, parserQueryInputDark, errorMessageText, helperMessageText } = useStyles()
+const ParseStringInput = ({ darkTheme, jsonInput, setParsedJson, className }) => {
+    const { parserQueryInput, parserQueryInputDark, errorMessageText, helperMessageText } = useStyles()
     const [parseString, setParseString] = useState('')
     const [errorMessage, setErrorMessage] = useState('')
 
@@ -147,7 +128,7 @@ const ParseStringInput = ({ darkTheme, jsonInput, setParsedJson }) => {
     }, [jsonInput]) // eslint-disable-line
 
     return (
-        <Grid item xs={12} className={[buttonBox, darkTheme ? darkThemeContainer : ''].join(' ')}>
+        <div className={className}>
             <label title='Parser query'>
                 <TextField
                     fullWidth
@@ -162,7 +143,7 @@ const ParseStringInput = ({ darkTheme, jsonInput, setParsedJson }) => {
             </label>
             {errorMessage && <Typography className={errorMessageText}>{errorMessage}</Typography>}
             {!errorMessage && <Typography className={helperMessageText}>Enter the parse query</Typography>}
-        </Grid>
+        </div>
     )
 }
 

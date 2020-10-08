@@ -9,7 +9,7 @@ import React, { useEffect } from 'react'
 const useStyles = makeStyles(theme => ({
     darkToolBar: {
         backgroundColor: grey[900],
-        boxShadow: theme.shadows[15]
+        boxShadow: theme.shadows[7]
     },
     darkBody: {
         backgroundColor: 'rgb(33 33 33)',

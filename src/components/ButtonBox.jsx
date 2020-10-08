@@ -1,7 +1,7 @@
 import { Button, Grid, makeStyles, Typography } from '@material-ui/core'
 import TransformIcon from '@material-ui/icons/Transform'
 import FileCopyIcon from '@material-ui/icons/FileCopy'
-import { grey, red } from '@material-ui/core/colors'
+import { grey } from '@material-ui/core/colors'
 import GetAppIcon from '@material-ui/icons/GetApp'
 import beautify from 'js-beautify/js/lib/beautify'
 import CodeIcon from '@material-ui/icons/Code'
@@ -10,23 +10,6 @@ import React from 'react'
 
 const useStyles = makeStyles(theme => {
     return {
-        buttonBox: {
-            height: '10rem',
-            borderRadius: '0.5rem',
-            border: `1px solid ${grey[500]}30`,
-            marginTop: '0.5rem',
-            padding: '1rem',
-            boxShadow: theme.shadows[5],
-            backgroundColor: 'rgb(250, 250, 250)',
-            '& p#error-text': {
-                color: red[500]
-            }
-        },
-        darkThemeContainer: {
-            backgroundColor: 'rgb(43, 43, 43)',
-            boxShadow: `${theme.shadows[7]}`,
-            color: 'white'
-        },
         darkThemeButton: {
             borderColor: grey[500],
             color: 'white'
@@ -45,8 +28,8 @@ const useStyles = makeStyles(theme => {
     }
 })
 
-const ButtonBox = ({ jsonInput, setJsonInput, darkTheme, errors, parsedJson }) => {
-    const { buttonBox, darkThemeContainer, darkThemeButton, buttonStyle } = useStyles()
+const ButtonBox = ({ jsonInput, setJsonInput, darkTheme, errors, parsedJson, className }) => {
+    const { darkThemeButton, buttonStyle } = useStyles()
 
     const parseAndSetInput = () => {
         setJsonInput(beautify.js_beautify(jsonInput, { indent_size: 4 }))
@@ -133,7 +116,7 @@ const ButtonBox = ({ jsonInput, setJsonInput, darkTheme, errors, parsedJson }) =
     ]
 
     return (
-        <Grid item container xs={12} className={[buttonBox, darkTheme && darkThemeContainer].join(' ')}>
+        <Grid container className={className}>
             <Grid item xs={6} md={7}>
                 {!!errors ? (
                     <Grid item sm={12}>
