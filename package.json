@@ -14,7 +14,7 @@
     "jsonlint-mod": "^1.7.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.3",
+    "react-scripts": "5.0.1",
     "react-syntax-highlighter": "^13.5.3"
   },
   "scripts": {
